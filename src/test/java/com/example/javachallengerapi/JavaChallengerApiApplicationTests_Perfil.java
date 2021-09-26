@@ -3,13 +3,12 @@ package com.example.javachallengerapi;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.inject.Inject;
 import java.util.logging.Logger;
 
 @SpringBootTest
-class JavaChallengerApiApplicationTests {
+class JavaChallengerApiApplicationTests_Perfil {
 
-    private static Logger log = Logger.getLogger(JavaChallengerApiApplicationTests.class.getSimpleName());
+    private static Logger log = Logger.getLogger(JavaChallengerApiApplicationTests_Perfil.class.getSimpleName());
 
     @BeforeAll
     static void setup(){
