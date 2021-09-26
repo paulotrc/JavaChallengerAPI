@@ -23,6 +23,11 @@ public class JWTUtil {
             .getBytes(StandardCharsets.UTF_8));
     private static Logger log = Logger.getLogger(JWTUtil.class.getSimpleName());
 
+    /**
+     * Gerador de token JWT
+     * @param usuario dados do usuário para geração do token
+     * @return String token gerado com base nos dados do usuário
+     */
     public static String gerarJWTUsuario(Usuario usuario) throws JWTValidationException {
         try {
             String jwtToken = Jwts.builder()
@@ -46,6 +51,11 @@ public class JWTUtil {
         }
     }
 
+    /**
+     * Validador de token do usuário
+     * @param token token a ser validado
+     * @exception JwtException caso o token não seja válido
+     */
     public static void validarTokenJWT(String token) throws JWTValidationException {
         try {
             Jws<Claims> claimsJws = Jwts.parserBuilder()

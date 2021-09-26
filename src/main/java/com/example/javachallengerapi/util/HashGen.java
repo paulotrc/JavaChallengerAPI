@@ -8,6 +8,11 @@ public class HashGen {
 
     private static final String ALGORITHM = "SHA-256";
 
+    /**
+     * Gerador de hash para criptografia de senha do usuário
+     * @param original senha definida pelo usuário
+     * @return String senha após aplicação de hash
+     */
     public static String generateHash(String original) throws NoSuchAlgorithmException {
 
         MessageDigest digest = MessageDigest.getInstance(ALGORITHM);
