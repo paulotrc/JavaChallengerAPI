@@ -26,7 +26,12 @@ public class PerfilService {
     @Inject
     private UsuarioRepository repository;
 
-
+    /**
+     * Consulta usuário por ID
+     * @param id Identificador do usuário
+     * @param token token de autorização do usuário
+     * @return UsuarioDtoResponse objeto de response de usuário
+     */
     public UsuarioDtoResponse consultaUsuarioPorId(String token, long id) throws NaoAutorizadoException, UsuarioNotFoundException, JWTValidationException, SessaoInvalidaException, UnsupportedEncodingException {
         if(token == null || token.isEmpty()){
             throw new NaoAutorizadoException("Não autorizado");

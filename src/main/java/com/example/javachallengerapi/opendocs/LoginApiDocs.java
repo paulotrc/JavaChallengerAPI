@@ -14,6 +14,11 @@ import java.io.Serializable;
 @Tag(name = "Login", description = "Endpoint API de operações de Login")
 public interface LoginApiDocs extends OpenApiDef{
 
+    /**
+     * Efetua o login do usuário
+     * @param logindto dados para efetuar o login do usuário
+     * @return ResponseEntity objeto de response da API
+     */
     @Operation(summary = "Operação de Login do Usuário com E-Mail e Senha previamente cadastradas.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Login efetuado com sucesso.", content = @Content(mediaType = "application/json")),

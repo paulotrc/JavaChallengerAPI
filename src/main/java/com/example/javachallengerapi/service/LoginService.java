@@ -31,6 +31,11 @@ public class LoginService {
 
     private static final String MSG_USUARIO_INVALIDO_EXCEPTION = "Usuário e/ou senha inválidos";
 
+    /**
+     * Efetua login do usuário
+     * @param loginDto Objeto com dados de login
+     * @return UsuarioDtoResponse objeto de response de usuário
+     */
     public UsuarioDtoResponse efetuaLogin(LoginDto loginDto) throws UsuarioInvalidoException, UsuarioNotFoundException, NoSuchAlgorithmException, JWTValidationException, UnsupportedEncodingException {
         UsuarioDtoResponse usuarioDtoResponse = null;
         Usuario usuario = repository.consultaUsuarioPorEmail(loginDto.getEmail());

@@ -13,6 +13,12 @@ import java.io.Serializable;
 @Tag(name = "Perfil", description = "Endpoint API de operações de Perfil")
 public interface PerfilApiDocs extends OpenApiDef {
 
+    /**
+     * Consulta ao perfil do usuário
+     * @param id identificador do usuário
+     * @param request cabeçalho de requisição que deve conter o token de autorização
+     * @return ResponseEntity objeto de response da API
+     */
     @Operation(summary = "Operação consulta ao perfil do usuário.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Perfil recuperado com sucesso.", content = @Content(mediaType = "application/json")),
@@ -21,5 +27,4 @@ public interface PerfilApiDocs extends OpenApiDef {
             @ApiResponse(responseCode = "404", description = "Perfil não encontrado.", content = @Content(mediaType = "application/json"))
     })
     ResponseEntity<? extends Serializable> consultaPerfil(HttpServletRequest request, long id);
-
 }

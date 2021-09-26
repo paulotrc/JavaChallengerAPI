@@ -26,6 +26,11 @@ public class UsuarioService {
 
     private static final String MSG_USUARIO_DUPLICADO_EXCEPTION = "Usuário com email: %s já cadastrado.";
 
+    /**
+     * Consulta usuário pod ID
+     * @param id identificador do usuário
+     * @return Optional objeto de response de usuário
+     */
     public Optional<Usuario> findById(long id){
         Optional<Usuario> user = repository.findById(id);
         if(user.get().getToken() != null){
@@ -34,6 +39,11 @@ public class UsuarioService {
         return user;
     };
 
+    /**
+     * Cria novo registro de usuário
+     * @param usuarioDto dados para criação do usuário
+     * @return UsuarioDtoResponse objeto de response de usuário
+     */
     public UsuarioDtoResponse criarUsuario(UsuarioDto usuarioDto) throws UsuarioDuplicadoException, NoSuchAlgorithmException, JWTValidationException, UnsupportedEncodingException {
         Usuario usuario = null;
         UsuarioDtoResponse usuarioDtoResponse = null;
