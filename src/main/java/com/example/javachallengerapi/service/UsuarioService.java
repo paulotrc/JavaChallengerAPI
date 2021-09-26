@@ -11,13 +11,14 @@ import com.example.javachallengerapi.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
 public class UsuarioService {
 
-    @Autowired
+    @Inject
     private UsuarioRepository repository;
 
     private static final String MSG_USUARIO_DUPLICADO_EXCEPTION = "Usuário com email: %s já cadastrado.";
@@ -30,7 +31,7 @@ public class UsuarioService {
     public UsuarioDtoResponse criarUsuario(UsuarioDto usuarioDto) throws UsuarioDuplicadoException, NoSuchAlgorithmException, JWTValidationException {
         Usuario usuario = null;
         UsuarioDtoResponse usuarioDtoResponse = new UsuarioDtoResponse();
-        if(repository.emailJaCadastrado(usuarioDto.getEmail()) == null){
+        if(repository.consultaUsuarioPorEmail(usuarioDto.getEmail()) == null){
             usuario = new Usuario(usuarioDto);
             String token = JWTUtil.gerarJWTUsuario(usuario);
             usuario.setToken(token);
@@ -42,7 +43,7 @@ public class UsuarioService {
         return usuarioDtoResponse;
     }
 
-    private void atualizaDadosUsuarioDto(UsuarioDtoResponse usuarioDto, Usuario usuario){
+    protected void atualizaDadosUsuarioDto(UsuarioDtoResponse usuarioDto, Usuario usuario){
         usuarioDto.setId(usuario.getId());
         usuarioDto.setLogin(usuario.getLogin());
         usuarioDto.setNome(usuario.getNome());

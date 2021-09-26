@@ -6,9 +6,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class HashGen {
 
+    private static final String ALGORITHM = "SHA-256";
+
     public static String generateHash(String original) throws NoSuchAlgorithmException {
 
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        MessageDigest digest = MessageDigest.getInstance(ALGORITHM);
         byte[] encodedhash = digest.digest(
                 original.getBytes(StandardCharsets.UTF_8));
 
