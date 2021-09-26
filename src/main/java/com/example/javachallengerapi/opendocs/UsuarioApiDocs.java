@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.Serializable;
 
-@Tag(name = "Usuário")
+@Tag(name = "Usuário", description = "Endpoint API de operações com o Usuário")
 @OpenAPIDefinition(info =
     @Info(title = "Java Challenger API", version = "1.0", description = "Documentação da API Java Challenger v1.0")
 )
@@ -32,7 +32,8 @@ public interface UsuarioApiDocs {
     @Operation(summary = "Cadastrar novo usuário.")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Dados do usuário inválidos", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "400", description = "Dados do usuário inválidos", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado.", content = @Content(mediaType = "application/json"))
     })
     ResponseEntity<? extends Serializable> cadastro(UsuarioDto usuarioDto);
 

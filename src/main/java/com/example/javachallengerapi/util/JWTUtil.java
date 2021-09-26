@@ -14,6 +14,10 @@ import java.util.Date;
 
 public class JWTUtil {
 
+    // EXPIRATION_TIME = 1 dias
+    static final long EXPIRATION_TIME = 86_000_000;
+    static final String TOKEN_PREFIX = "Bearer";
+    static final String HEADER_STRING = "Authorization";
     private static final SecretKey CHAVE = Keys.hmacShaKeyFor("284c3f2534fe741fbbaf5f84ba1e90c46b56d7bfe87681679749cb85be11dd38"
             .getBytes(StandardCharsets.UTF_8));
 
@@ -25,10 +29,13 @@ public class JWTUtil {
                     .setIssuedAt(new Date())
                     .setExpiration(
                             Date.from(
-                                    LocalDateTime.now().plusMinutes(5L)
+                                    LocalDateTime.now().plusMinutes(EXPIRATION_TIME)
                                             .atZone(ZoneId.systemDefault())
                                             .toInstant()))
-                    .signWith(CHAVE, SignatureAlgorithm.RS512)
+                    .claim("USER_EMAIL", usuario.getEmail())
+                    .claim("USERNAME", usuario.getLogin())
+//                  .claim("ROLES", user.getRoles());
+                    .signWith(CHAVE, SignatureAlgorithm.HS512)
                     .compact();
 
             return jwtToken;

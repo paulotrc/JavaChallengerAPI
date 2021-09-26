@@ -65,11 +65,13 @@ public class Usuario implements Serializable {
         this.preencheTelefones(usuarioDto.getTelefoneDtoList());
     }
 
-    public Usuario(UsuarioDtoResponse usuarioDto) throws NoSuchAlgorithmException {
+    public Usuario(UsuarioDtoResponse usuarioDto) {
+        this.id = usuarioDto.getId();
         this.login = usuarioDto.getLogin();
         this.nome = usuarioDto.getNome();
         this.email = usuarioDto.getEmail();
         this.created = (usuarioDto.getCreated() == null ? new Date() : usuarioDto.getCreated());
+        this.token = usuarioDto.getToken();
         this.telefoneUsuarioList = new ArrayList<>();
         this.preencheTelefones(usuarioDto.getTelefoneDtoList());
     }

@@ -28,7 +28,6 @@ public class UsuarioController implements UsuarioApiDocs {
     @GetMapping("/{id}")
     public ResponseEntity<? extends Serializable> findById(@PathVariable long id) throws UsuarioNotFoundException {
         Optional<Usuario> user = service.findById(id);
-        user.get().getId();
         if(user.isPresent()){
             return new ResponseEntity<UsuarioDto>(UsuarioDto.from(user.get()), HttpStatus.OK);
         }

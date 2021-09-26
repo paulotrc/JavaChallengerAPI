@@ -18,7 +18,6 @@ import java.io.Serializable;
 
 @RestController
 @RequestMapping("/alive")
-@Tag(name = "alive", description = "Endpoint API para verificação se a API está executando.")
 public class AliveController implements AliveApiDocs {
 
     private final AliveDto resposta = new AliveDto("API ativa!");
