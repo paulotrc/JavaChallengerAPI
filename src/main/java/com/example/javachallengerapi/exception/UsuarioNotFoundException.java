@@ -12,6 +12,7 @@ public class UsuarioNotFoundException extends Exception {
         super(errorMessage);
     }
     public UsuarioNotFoundException(String codigo, String errorMessage) {
+        super(errorMessage);
         this.codigo = codigo;
         this.errorMessage = errorMessage;
     }

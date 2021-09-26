@@ -12,6 +12,7 @@ public class UsuarioDuplicadoException extends Exception {
         super(errorMessage);
     }
     public UsuarioDuplicadoException(String codigo, String errorMessage) {
+        super(errorMessage);
         this.codigo = codigo;
         this.errorMessage = errorMessage;
     }

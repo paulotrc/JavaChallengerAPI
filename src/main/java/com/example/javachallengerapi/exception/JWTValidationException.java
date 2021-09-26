@@ -12,6 +12,7 @@ public class JWTValidationException extends Exception {
         super(errorMessage);
     }
     public JWTValidationException(String codigo, String errorMessage) {
+        super(errorMessage);
         this.codigo = codigo;
         this.errorMessage = errorMessage;
     }

@@ -1,13 +1,11 @@
 package com.example.javachallengerapi.dto;
 
-import com.example.javachallengerapi.model.Usuario;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 public class LoginDto implements Serializable {

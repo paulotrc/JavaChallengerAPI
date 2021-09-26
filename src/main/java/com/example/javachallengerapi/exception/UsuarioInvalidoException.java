@@ -12,6 +12,7 @@ public class UsuarioInvalidoException extends Exception {
         super(errorMessage);
     }
     public UsuarioInvalidoException(String codigo, String errorMessage) {
+        super(errorMessage);
         this.codigo = codigo;
         this.errorMessage = errorMessage;
     }

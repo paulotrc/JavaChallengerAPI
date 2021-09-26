@@ -8,7 +8,6 @@ import com.example.javachallengerapi.exception.UsuarioDuplicadoException;
 import com.example.javachallengerapi.model.Usuario;
 import com.example.javachallengerapi.repository.UsuarioRepository;
 import com.example.javachallengerapi.util.JWTUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
