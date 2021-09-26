@@ -2,9 +2,7 @@ package com.example.javachallengerapi.util;
 
 import com.example.javachallengerapi.exception.JWTValidationException;
 import com.example.javachallengerapi.model.Usuario;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.http.HttpStatus;
 
@@ -22,7 +20,7 @@ public class JWTUtil {
     public static String gerarJWTUsuario(Usuario usuario) throws JWTValidationException {
         try {
             String jwtToken = Jwts.builder()
-                    .setSubject(usuario.getLogin()+usuario.getSenha())
+                    .setSubject(usuario.getLogin())
                     .setIssuer("127.0.0.1:8080")
                     .setIssuedAt(new Date())
                     .setExpiration(
@@ -39,12 +37,17 @@ public class JWTUtil {
         }
     }
 
-    public static void validaTokenJWT(String token) throws JWTValidationException {
+    public static boolean validarTokenJWT(String token, Usuario usuario) throws JWTValidationException {
         try {
-            Jwts.parserBuilder()
+            Jws<Claims> claimsJws = Jwts.parserBuilder()
                     .setSigningKey(CHAVE)
                     .build()
                     .parseClaimsJws(token);
+
+            String loginValidar = claimsJws.getBody().getSubject().split(":")[0];
+
+            return true;
+
         }catch (JwtException e){
             throw new JWTValidationException(HttpStatus.UNAUTHORIZED.toString(), e.getLocalizedMessage());
         }

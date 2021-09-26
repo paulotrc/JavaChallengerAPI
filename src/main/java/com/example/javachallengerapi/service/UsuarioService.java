@@ -3,9 +3,11 @@ package com.example.javachallengerapi.service;
 import com.example.javachallengerapi.dto.TelefoneDto;
 import com.example.javachallengerapi.dto.UsuarioDto;
 import com.example.javachallengerapi.dto.UsuarioDtoResponse;
+import com.example.javachallengerapi.exception.JWTValidationException;
 import com.example.javachallengerapi.exception.UsuarioDuplicadoException;
 import com.example.javachallengerapi.model.Usuario;
 import com.example.javachallengerapi.repository.UsuarioRepository;
+import com.example.javachallengerapi.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +27,13 @@ public class UsuarioService {
         return user;
     };
 
-    public UsuarioDtoResponse criarUsuario(UsuarioDto usuarioDto) throws UsuarioDuplicadoException, NoSuchAlgorithmException {
+    public UsuarioDtoResponse criarUsuario(UsuarioDto usuarioDto) throws UsuarioDuplicadoException, NoSuchAlgorithmException, JWTValidationException {
         Usuario usuario = null;
         UsuarioDtoResponse usuarioDtoResponse = new UsuarioDtoResponse();
         if(repository.usuarioExiste(usuarioDto.getLogin(), usuarioDto.getNome(), usuarioDto.getEmail()) == null){
             usuario = new Usuario(usuarioDto);
+            String token = JWTUtil.gerarJWTUsuario(usuario);
+            usuario.setToken(token);
             repository.save(usuario);
             atualizaDadosUsuarioDto(usuarioDtoResponse, usuario);
         }else{
