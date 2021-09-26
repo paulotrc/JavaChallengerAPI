@@ -20,7 +20,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    private static final String MSG_USUARIO_DUPLICADO_EXCEPTION = "Usuário com o login : %s ou Nome : %s ou email: %s já cadastrado.";
+    private static final String MSG_USUARIO_DUPLICADO_EXCEPTION = "Usuário com email: %s já cadastrado.";
 
     public Optional<Usuario> findById(long id){
         Optional<Usuario> user = repository.findById(id);
@@ -30,14 +30,14 @@ public class UsuarioService {
     public UsuarioDtoResponse criarUsuario(UsuarioDto usuarioDto) throws UsuarioDuplicadoException, NoSuchAlgorithmException, JWTValidationException {
         Usuario usuario = null;
         UsuarioDtoResponse usuarioDtoResponse = new UsuarioDtoResponse();
-        if(repository.usuarioExiste(usuarioDto.getLogin(), usuarioDto.getNome(), usuarioDto.getEmail()) == null){
+        if(repository.emailJaCadastrado(usuarioDto.getEmail()) == null){
             usuario = new Usuario(usuarioDto);
             String token = JWTUtil.gerarJWTUsuario(usuario);
             usuario.setToken(token);
             repository.save(usuario);
             atualizaDadosUsuarioDto(usuarioDtoResponse, usuario);
         }else{
-            throw new UsuarioDuplicadoException(String.format(MSG_USUARIO_DUPLICADO_EXCEPTION, usuarioDto.getLogin(), usuarioDto.getNome(), usuarioDto.getEmail()));
+            throw new UsuarioDuplicadoException(String.format(MSG_USUARIO_DUPLICADO_EXCEPTION, usuarioDto.getEmail()));
         }
         return usuarioDtoResponse;
     }
