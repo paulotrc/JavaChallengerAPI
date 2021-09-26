@@ -31,6 +31,7 @@ public class PerfilService {
         if(token == null || token.isEmpty()){
             throw new NaoAutorizadoException("Não autorizado");
         }else {
+            token = token.replace("Bearer ", "");
             Optional<Usuario> usuario = usuarioService.findById(id);
             if(!usuario.isPresent()){
                 throw new UsuarioNotFoundException("Usuário não encontrado");

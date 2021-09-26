@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.logging.Logger;
 
@@ -25,9 +26,10 @@ public class PerfilController implements PerfilApiDocs {
 
     @Override
     @PostMapping("/{id}")
-    public ResponseEntity<? extends Serializable> consultaPerfil(@RequestHeader(value = "Authorization") String token, @PathVariable long id){
+    public ResponseEntity<? extends Serializable> consultaPerfil(HttpServletRequest request, @PathVariable long id) {
         try {
-            UsuarioDtoResponse usuarioDtoResponse = service.consultaUsuarioPorId(token.split(" ")[1], id);
+            String authToken = request.getHeader("Authorization");
+            UsuarioDtoResponse usuarioDtoResponse = service.consultaUsuarioPorId(authToken, id);
             return ResponseEntity.status(HttpStatus.OK).body(usuarioDtoResponse);
         }catch (NaoAutorizadoException e){
             log.severe(e.getLocalizedMessage());
