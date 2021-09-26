@@ -1,8 +1,6 @@
 package com.example.javachallengerapi.opendocs;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -12,11 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.Serializable;
 
 @Tag(name = "Alive", description = "Endpoint API para verificação se a API está executando.")
-@OpenAPIDefinition(info =
-    @Info(title = "Java Challenger API", version = "1.0", description = "Documentação da API Java Challenger v1.0")
-)
-
-public interface AliveApiDocs {
+public interface AliveApiDocs extends OpenApiDef {
 
     @Operation(summary = "Verifica se a API está ativa.")
     @ApiResponses(value = {

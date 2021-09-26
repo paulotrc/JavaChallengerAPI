@@ -1,8 +1,9 @@
 package com.example.javachallengerapi.exception;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 public class UsuarioInvalidoException extends Exception {
 
     private String codigo;

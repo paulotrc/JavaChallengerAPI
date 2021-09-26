@@ -8,12 +8,12 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class ExceptionApi implements Serializable {
+public class ApiException implements Serializable {
 
     private String mensagem;
 
-    public static ExceptionApi create(String localizedMessage) {
-        ExceptionApi exceptionApi = new ExceptionApi(localizedMessage);
-        return exceptionApi;
+    public static ApiException create(String localizedMessage) {
+        ApiException apiException = new ApiException(localizedMessage);
+        return apiException;
     }
 }

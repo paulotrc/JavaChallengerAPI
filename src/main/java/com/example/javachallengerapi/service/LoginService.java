@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class LoginService {
 
     private static final String MSG_USUARIO_INVALIDO_EXCEPTION = "Usuário e/ou senha inválidos";
 
-    public UsuarioDtoResponse efetuaLogin(LoginDto loginDto) throws UsuarioInvalidoException, UsuarioNotFoundException, NoSuchAlgorithmException, JWTValidationException {
+    public UsuarioDtoResponse efetuaLogin(LoginDto loginDto) throws UsuarioInvalidoException, UsuarioNotFoundException, NoSuchAlgorithmException, JWTValidationException, UnsupportedEncodingException {
         UsuarioDtoResponse usuarioDtoResponse = null;
         Usuario usuario = repository.consultaUsuarioPorEmail(loginDto.getEmail());
         if(usuario == null){
@@ -38,8 +39,8 @@ public class LoginService {
         }else if(usuario != null && !senhaUsuarioValida(loginDto, usuario)){
             throw new UsuarioInvalidoException(MSG_USUARIO_INVALIDO_EXCEPTION);
         }else{
+            usuarioService.atualizaUsuario(usuario);
             usuarioDtoResponse = new UsuarioDtoResponse();
-            usuario.setToken(JWTUtil.gerarJWTUsuario(usuario));
             usuarioService.atualizaDadosUsuarioDto(usuarioDtoResponse, usuario);
         }
         return usuarioDtoResponse;

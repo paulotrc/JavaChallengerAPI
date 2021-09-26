@@ -4,15 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class UsuarioNotFoundException extends Exception {
+public class SessaoInvalidaException extends Exception {
 
     private String codigo;
     private String errorMessage;
 
-    public UsuarioNotFoundException(String errorMessage) {
+    public SessaoInvalidaException(String errorMessage) {
         super(errorMessage);
     }
-    public UsuarioNotFoundException(String codigo, String errorMessage) {
+    public SessaoInvalidaException(String codigo, String errorMessage) {
         super(errorMessage);
         this.codigo = codigo;
         this.errorMessage = errorMessage;

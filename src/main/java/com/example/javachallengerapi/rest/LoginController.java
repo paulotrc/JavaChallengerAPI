@@ -3,7 +3,7 @@ package com.example.javachallengerapi.rest;
 
 import com.example.javachallengerapi.dto.LoginDto;
 import com.example.javachallengerapi.dto.UsuarioDtoResponse;
-import com.example.javachallengerapi.exception.ExceptionApi;
+import com.example.javachallengerapi.exception.ApiException;
 import com.example.javachallengerapi.exception.UsuarioInvalidoException;
 import com.example.javachallengerapi.exception.UsuarioNotFoundException;
 import com.example.javachallengerapi.model.Usuario;
@@ -38,13 +38,13 @@ public class LoginController implements LoginApiDocs {
             return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioDtoResponse.from(new Usuario(usuarioResponse)));
         }catch (UsuarioNotFoundException e){
             log.severe(e.getLocalizedMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ExceptionApi.create(e.getLocalizedMessage()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiException.create(e.getLocalizedMessage()));
         }catch (UsuarioInvalidoException e){
             log.severe(e.getLocalizedMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionApi.create(e.getLocalizedMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiException.create(e.getLocalizedMessage()));
         }catch (Exception e){
             log.severe(e.getLocalizedMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionApi.create(e.getLocalizedMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiException.create(e.getLocalizedMessage()));
         }
     }
 }

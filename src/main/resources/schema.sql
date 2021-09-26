@@ -8,7 +8,8 @@ CREATE TABLE TB_USUARIO (
                               senha VARCHAR(25) NOT NULL,
                               ts_created DATE ,
                               ts_modified DATE,
-                              ts_last_login DATE
+                              ts_last_login DATE,
+                              token BLOB
 );
 
 CREATE TABLE TB_TELEFONE_USUARIO (

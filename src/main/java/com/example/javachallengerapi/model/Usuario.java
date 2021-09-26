@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -45,8 +47,9 @@ public class Usuario implements Serializable {
     @Column(name = "ts_last_login")
     private Date lastLogin;
 
-    @Transient
-    private String token;
+    @Lob
+    @Column(name = "token")
+    private byte[] token;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<TelefoneUsuario> telefoneUsuarioList;
@@ -71,7 +74,7 @@ public class Usuario implements Serializable {
         this.nome = usuarioDto.getNome();
         this.email = usuarioDto.getEmail();
         this.created = (usuarioDto.getCreated() == null ? new Date() : usuarioDto.getCreated());
-        this.token = usuarioDto.getToken();
+        this.token = Base64.getEncoder().encode(usuarioDto.getToken().getBytes(StandardCharsets.UTF_8));;
         this.telefoneUsuarioList = new ArrayList<>();
         this.preencheTelefones(usuarioDto.getTelefoneDtoList());
     }

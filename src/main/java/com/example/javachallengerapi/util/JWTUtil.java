@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.logging.Logger;
 
 public class JWTUtil {
 
@@ -20,6 +21,7 @@ public class JWTUtil {
     static final String HEADER_STRING = "Authorization";
     private static final SecretKey CHAVE = Keys.hmacShaKeyFor("284c3f2534fe741fbbaf5f84ba1e90c46b56d7bfe87681679749cb85be11dd38"
             .getBytes(StandardCharsets.UTF_8));
+    private static Logger log = Logger.getLogger(JWTUtil.class.getSimpleName());
 
     public static String gerarJWTUsuario(Usuario usuario) throws JWTValidationException {
         try {
@@ -44,19 +46,15 @@ public class JWTUtil {
         }
     }
 
-    public static boolean validarTokenJWT(String token, Usuario usuario) throws JWTValidationException {
+    public static void validarTokenJWT(String token) throws JWTValidationException {
         try {
             Jws<Claims> claimsJws = Jwts.parserBuilder()
                     .setSigningKey(CHAVE)
                     .build()
                     .parseClaimsJws(token);
-
-            String loginValidar = claimsJws.getBody().getSubject().split(":")[0];
-
-            return true;
-
         }catch (JwtException e){
-            throw new JWTValidationException(HttpStatus.UNAUTHORIZED.toString(), e.getLocalizedMessage());
+            log.severe(e.getLocalizedMessage());
+            throw new JWTValidationException(HttpStatus.UNAUTHORIZED.toString(), "Não autorizado");
         }
     }
 }

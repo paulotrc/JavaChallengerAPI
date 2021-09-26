@@ -7,6 +7,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +60,7 @@ public class UsuarioDtoResponse extends DadosCriacao implements Serializable {
         dto.setLogin(usuario.getLogin());
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
-        dto.setToken(usuario.getToken());
+        dto.setToken(usuario.getToken() != null ? new String(Base64.getDecoder().decode(usuario.getToken()), StandardCharsets.UTF_8) : "");
         dto.setEmail(usuario.getEmail());
         dto.setCreated(usuario.getCreated());
         dto.setModified(usuario.getModified());
