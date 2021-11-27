@@ -2,17 +2,14 @@ package com.example.javachallengerapi.model;
 
 import com.example.javachallengerapi.dto.TelefoneDto;
 import com.example.javachallengerapi.dto.UsuarioDto;
-import com.example.javachallengerapi.dto.UsuarioDtoResponse;
 import com.example.javachallengerapi.util.HashGen;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -64,17 +61,6 @@ public class Usuario implements Serializable {
         this.senha = HashGen.generateHash(usuarioDto.getSenha());
         this.email = usuarioDto.getEmail();
         this.created = new Date();
-        this.telefoneUsuarioList = new ArrayList<>();
-        this.preencheTelefones(usuarioDto.getTelefoneDtoList());
-    }
-
-    public Usuario(UsuarioDtoResponse usuarioDto) {
-        this.id = usuarioDto.getId();
-        this.login = usuarioDto.getLogin();
-        this.nome = usuarioDto.getNome();
-        this.email = usuarioDto.getEmail();
-        this.created = (usuarioDto.getCreated() == null ? new Date() : usuarioDto.getCreated());
-        this.token = Base64.getEncoder().encode(usuarioDto.getToken().getBytes(StandardCharsets.UTF_8));;
         this.telefoneUsuarioList = new ArrayList<>();
         this.preencheTelefones(usuarioDto.getTelefoneDtoList());
     }

@@ -35,7 +35,7 @@ public class LoginController implements LoginApiDocs {
     public ResponseEntity<? extends Serializable> login(@RequestBody @Valid LoginDto loginDto) {
         try {
             UsuarioDtoResponse usuarioResponse = service.efetuaLogin(loginDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioDtoResponse.from(new Usuario(usuarioResponse)));
+            return ResponseEntity.status(HttpStatus.CREATED).body(usuarioResponse);
         }catch (UsuarioNotFoundException e){
             log.severe(e.getLocalizedMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiException.create(e.getLocalizedMessage()));
