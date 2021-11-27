@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Base64;
 import java.util.Optional;
 
 @Service

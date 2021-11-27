@@ -3,7 +3,6 @@ package com.example.javachallengerapi.exception;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
 public class UsuarioInvalidoException extends Exception {
 
     private String codigo;

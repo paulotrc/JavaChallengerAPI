@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
 public class ApiException implements Serializable {
 
     private String mensagem;
